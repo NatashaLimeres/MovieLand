@@ -25,8 +25,15 @@ const App = () => {
     }
     
     useEffect(() => {
-        searchMovies('Spiderman');
-    }, []);
+        if(searchTerm.length > 2) {
+            const delayDebounce = setTimeout(() => {
+                searchMovies(searchTerm)
+              }, 1000);
+              return () => clearTimeout(delayDebounce);
+        } else {
+            searchMovies('Batman')
+        }
+    }, [searchTerm]);
 
     return(
         <div className='app'>
